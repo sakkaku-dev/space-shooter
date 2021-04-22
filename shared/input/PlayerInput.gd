@@ -6,8 +6,8 @@ Input Reader for a single player
 
 class_name PlayerInput
 
-var joypad_input = false
-var device_id = 0
+export var joypad_input = false
+export var device_id = 0
 
 func _init(device = 0, joypad = false):
 	self.device_id = device
@@ -31,3 +31,7 @@ func handle_input(event: InputEvent) -> void:
 		return
 	
 	.handle_input(event)
+
+
+func get_motion(body: KinematicBody2D) -> Vector2:
+	return Vector2.ZERO

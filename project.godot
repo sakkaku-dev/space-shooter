@@ -34,6 +34,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://shared/input/InputReader.gd"
 }, {
+"base": "Node",
+"class": "MouseFollowState",
+"language": "GDScript",
+"path": "res://shared/state/MouseFollowState.gd"
+}, {
+"base": "State",
+"class": "MoveDirectionState",
+"language": "GDScript",
+"path": "res://shared/state/MoveDirectionState.gd"
+}, {
 "base": "Focusable",
 "class": "PlayerFocus",
 "language": "GDScript",
@@ -48,6 +58,11 @@ _global_script_classes=[ {
 "class": "SceneTest",
 "language": "GDScript",
 "path": "res://tests/SceneTest.gd"
+}, {
+"base": "Node",
+"class": "State",
+"language": "GDScript",
+"path": "res://shared/state/State.gd"
 }, {
 "base": "GridContainer",
 "class": "TableContainer",
@@ -65,9 +80,12 @@ _global_script_class_icons={
 "Health": "",
 "HurtBox": "",
 "InputReader": "",
+"MouseFollowState": "",
+"MoveDirectionState": "",
 "PlayerFocus": "",
 "PlayerInput": "",
 "SceneTest": "",
+"State": "",
 "TableContainer": "",
 "UnitTest": ""
 }
@@ -86,9 +104,13 @@ Display=8
 
 [application]
 
-config/name="godot-template"
+config/name="space-shooter"
 run/main_scene="res://scenes/Game.tscn"
 config/icon="res://icon.png"
+
+[display]
+
+window/stretch/aspect="expand"
 
 [editor_plugins]
 
@@ -96,22 +118,9 @@ enabled=PoolStringArray(  )
 
 [input]
 
-move_left={
+shoot={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"unicode":0,"echo":false,"script":null)
-, Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":0,"axis_value":-1.0,"script":null)
- ]
-}
-move_right={
-"deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"unicode":0,"echo":false,"script":null)
-, Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":0,"axis_value":1.0,"script":null)
- ]
-}
-jump={
-"deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"unicode":0,"echo":false,"script":null)
-, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":0,"pressure":0.0,"pressed":false,"script":null)
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
 
