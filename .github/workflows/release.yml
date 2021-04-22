@@ -1,0 +1,33 @@
+name: Release Desktop
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  release:
+    name: Release Desktop Versions
+    runs-on: ubuntu-latest
+    container:
+      image: barichello/godot-ci:3.2.3
+    steps:
+      - uses: actions/checkout@v1
+      - run: |
+          mkdir -v -p ~/.local/share/godot/templates
+          mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+      - run: |
+          mkdir -v -p build/win
+          godot -v --export "Windows" ./build/win/main.exe
+          cd build/win && zip -r windows.zip *
+      - run: |
+          mkdir -v -p build/linux
+          godot -v --export "Linux" ./build/linux/main.x86_64
+          cd build/linux && zip -r linux.zip *
+      - uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          files: |
+            build/win/windows.zip
+            build/linux/linux.zip
