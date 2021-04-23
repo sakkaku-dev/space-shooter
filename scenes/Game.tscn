@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/spaceship/PlayerShip.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/black.png" type="Texture" id=2]
 [ext_resource path="res://scenes/Game.gd" type="Script" id=3]
 [ext_resource path="res://shared/state/MouseFollowState.gd" type="Script" id=4]
 [ext_resource path="res://scenes/spaceship/EnemyShip.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/theme.tres" type="Theme" id=6]
+[ext_resource path="res://scenes/ui/playerLife3_blue.png" type="Texture" id=7]
+[ext_resource path="res://scenes/ui/numeralX.png" type="Texture" id=8]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 3 )
@@ -21,10 +24,10 @@ position = Vector2( 540, 1750 )
 script = ExtResource( 4 )
 body_path = NodePath("..")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="Background" type="CanvasLayer" parent="."]
 layer = -1
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+[node name="TextureRect" type="TextureRect" parent="Background"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 2 )
@@ -32,3 +35,46 @@ stretch_mode = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="UI"]
+anchor_right = 1.0
+margin_bottom = 66.0
+theme = ExtResource( 6 )
+custom_constants/margin_right = 30
+custom_constants/margin_top = 30
+custom_constants/margin_left = 30
+custom_constants/margin_bottom = 30
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/MarginContainer"]
+margin_left = 30.0
+margin_top = 30.0
+margin_right = 1050.0
+margin_bottom = 75.0
+custom_constants/separation = 10
+
+[node name="TextureRect" type="TextureRect" parent="UI/MarginContainer/HBoxContainer"]
+margin_right = 32.0
+margin_bottom = 45.0
+texture = ExtResource( 7 )
+stretch_mode = 4
+
+[node name="TextureRect2" type="TextureRect" parent="UI/MarginContainer/HBoxContainer"]
+margin_left = 42.0
+margin_right = 59.0
+margin_bottom = 45.0
+texture = ExtResource( 8 )
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/MarginContainer/HBoxContainer"]
+margin_left = 69.0
+margin_right = 102.0
+margin_bottom = 45.0
+text = "3"
