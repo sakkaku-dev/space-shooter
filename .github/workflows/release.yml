@@ -31,3 +31,20 @@ jobs:
           files: |
             build/win/windows.zip
             build/linux/linux.zip
+  publish-itch:
+    name: Publish to itch.io
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          mkdir -v -p ~/.local/share/godot/templates
+          mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+      - run: |
+          mkdir -v -p build/web
+          godot -v --export "HTML5" ./build/web/index.html
+      - name: Deploy
+        shell: bash
+        env:
+          BUTLER_API_KEY: ${{secrets.BUTLER_API_KEY}}
+          USER: ${{secrets.ITCHIO_USER}}
+          GAME: ${{secrets.ITCHIO_GAME}}
+        run: butler push build/web $USER/$GAME:web

@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/laser/Laser.tscn" type="PackedScene" id=1]
+[ext_resource path="res://shared/misc/Spawner.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/spaceship/playerShip3_blue.png" type="Texture" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 38.0
+
+[node name="PlayerShip" type="KinematicBody2D"]
+collision_layer = 8
+collision_mask = 0
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="LaserSpawner" parent="." instance=ExtResource( 2 )]
+position = Vector2( 0, -44.7171 )
+scene = ExtResource( 1 )
+spawn_delay = 0.2
+spawn = true

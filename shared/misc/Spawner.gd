@@ -4,11 +4,11 @@ signal spawned
 
 export var scene: PackedScene
 export var spawn_delay = 1.0
+export var spawn = false
 
 onready var timer = $Timer
 
 var can_spawn = true
-var spawn = false
 
 func set_spawn(value):
 	spawn = value
@@ -21,6 +21,7 @@ func _spawn():
 	var instance = scene.instance()
 	get_tree().current_scene.add_child(instance)
 	instance.global_transform = global_transform
+	instance.rotation = rotation
 	emit_signal("spawned")
 	
 	can_spawn = false
