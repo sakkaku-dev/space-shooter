@@ -90,7 +90,7 @@ margin_left = 69.0
 margin_right = 102.0
 margin_bottom = 45.0
 text = "3"
-[connection signal="died" from="PlayerShip" to="SpawnerRandom/Spawner" method="set_spawn" binds= [ false ]]
+[connection signal="died" from="PlayerShip" to="." method="_on_PlayerShip_died"]
 [connection signal="health_changed" from="PlayerShip/Health" to="UI/MarginContainer/HealthUI" method="set_health"]
 [connection signal="spawned" from="SpawnerRandom/Spawner" to="SpawnerRandom" method="move"]
 
