@@ -22,12 +22,12 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "Health",
 "language": "GDScript",
-"path": "res://scripts/combat/Health.gd"
+"path": "res://shared/combat/Health.gd"
 }, {
 "base": "Area2D",
 "class": "HurtBox",
 "language": "GDScript",
-"path": "res://scripts/combat/HurtBox.gd"
+"path": "res://shared/combat/HurtBox.gd"
 }, {
 "base": "Node",
 "class": "InputReader",

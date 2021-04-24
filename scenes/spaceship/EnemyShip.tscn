@@ -1,30 +1,46 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://scenes/spaceship/PlayerShip.tscn" type="PackedScene" id=1]
+[ext_resource path="res://shared/combat/Health.gd" type="Script" id=1]
 [ext_resource path="res://scenes/spaceship/enemyRed1.png" type="Texture" id=2]
 [ext_resource path="res://scenes/laser/EnemyLaser.tscn" type="PackedScene" id=3]
 [ext_resource path="res://shared/state/MoveForwardState.gd" type="Script" id=4]
+[ext_resource path="res://scenes/spaceship/Spaceship.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/spaceship/EnemyShip.gd" type="Script" id=6]
+[ext_resource path="res://shared/misc/FreeOnExit.tscn" type="PackedScene" id=7]
 
-[sub_resource type="CircleShape2D" id=1]
-radius = 40.0
+[node name="EnemyShip" type="Node2D"]
+script = ExtResource( 6 )
 
-[node name="EnemyShip" instance=ExtResource( 1 )]
-collision_layer = 16
+[node name="FreeOnExit" parent="." instance=ExtResource( 7 )]
+obj_path = NodePath("..")
 
-[node name="Sprite" parent="." index="0"]
-texture = ExtResource( 2 )
+[node name="Health" type="Node" parent="."]
+script = ExtResource( 1 )
+max_health = 2
 
-[node name="CollisionShape2D" parent="." index="1"]
-shape = SubResource( 1 )
-
-[node name="LaserSpawner" parent="." index="2"]
-position = Vector2( 0, 45.3844 )
-rotation = 3.14159
-scene = [ ExtResource( 3 ) ]
-spawn_delay = 0.8
-
-[node name="MoveForwardState" type="Node" parent="." index="3"]
+[node name="MoveForwardState" type="Node" parent="."]
 script = ExtResource( 4 )
 speed = 300
 backwards = true
 body_path = NodePath("..")
+
+[node name="Spaceship" parent="." instance=ExtResource( 5 )]
+collision_layer = 16
+
+[node name="InvincibilityTimer" parent="Spaceship" index="0"]
+wait_time = 0.5
+one_shot = false
+
+[node name="Sprite" parent="Spaceship" index="2"]
+texture = ExtResource( 2 )
+
+[node name="LaserSpawner" parent="Spaceship" index="3"]
+position = Vector2( 0, 50 )
+rotation = 3.14159
+scene = [ ExtResource( 3 ) ]
+spawn_delay = 1.0
+spawn = true
+[connection signal="zero_health" from="Health" to="." method="_on_Health_zero_health"]
+[connection signal="damaged" from="Spaceship" to="Health" method="reduce"]
+
+[editable path="Spaceship"]

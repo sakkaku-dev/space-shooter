@@ -6,13 +6,17 @@
 
 [node name="EnemyShip4" instance=ExtResource( 1 )]
 
-[node name="Sprite" parent="." index="0"]
+[node name="Health" parent="." index="1"]
+max_health = 4
+
+[node name="MoveForwardState" parent="." index="2"]
+speed = 150
+
+[node name="Sprite" parent="Spaceship" index="2"]
 texture = ExtResource( 2 )
 
-[node name="LaserSpawner" parent="." index="2"]
-position = Vector2( 0, 58.7328 )
+[node name="LaserSpawner" parent="Spaceship" index="3"]
 scene = [ ExtResource( 3 ) ]
-spawn_delay = 2.0
+spawn_delay = 3.0
 
-[node name="MoveForwardState" parent="." index="3"]
-speed = 150
+[editable path="Spaceship"]

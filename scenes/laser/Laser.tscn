@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/laser/laserBlue06.png" type="Texture" id=1]
 [ext_resource path="res://shared/state/MoveForwardState.gd" type="Script" id=2]
 [ext_resource path="res://shared/misc/FreeOnExit.tscn" type="PackedScene" id=3]
+[ext_resource path="res://shared/combat/HitBox.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5, 18 )
@@ -10,6 +11,7 @@ extents = Vector2( 5, 18 )
 [node name="Laser" type="Area2D"]
 collision_layer = 0
 collision_mask = 16
+script = ExtResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )

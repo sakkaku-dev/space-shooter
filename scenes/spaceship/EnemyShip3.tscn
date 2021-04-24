@@ -7,16 +7,18 @@
 
 [node name="EnemyShip3" instance=ExtResource( 3 )]
 
-[node name="Sprite" parent="." index="0"]
+[node name="Sprite" parent="Spaceship" index="2"]
 texture = ExtResource( 2 )
 
-[node name="LaserSpawner" parent="." index="2"]
-position = Vector2( -25, 50 )
-spawn_delay = 1.0
-
-[node name="Spawner" parent="." index="3" instance=ExtResource( 1 )]
+[node name="Spawner" parent="Spaceship" index="3" instance=ExtResource( 1 )]
 position = Vector2( 25, 50 )
 rotation = 3.14159
 scene = [ ExtResource( 4 ) ]
-spawn_delay = 1.0
+spawn_delay = 1.5
 spawn = true
+
+[node name="LaserSpawner" parent="Spaceship" index="4"]
+position = Vector2( -25, 50 )
+spawn_delay = 1.5
+
+[editable path="Spaceship"]
