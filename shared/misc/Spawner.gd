@@ -2,7 +2,7 @@ extends Position2D
 
 signal spawned
 
-export var scene: PackedScene
+export(Array, PackedScene) var scene: Array
 export var spawn_delay = 1.0
 export var spawn = false
 
@@ -18,7 +18,7 @@ func _process(delta):
 		_spawn()
 
 func _spawn():
-	var instance = scene.instance()
+	var instance = scene[Random.random_int(0, scene.size())].instance()
 	get_tree().current_scene.add_child(instance)
 	instance.global_transform = global_transform
 	instance.rotation = rotation

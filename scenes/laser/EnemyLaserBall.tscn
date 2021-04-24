@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/laser/Laser.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/laser/laserCircleRed.png" type="Texture" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 15.18
+
+[node name="EnemyLaserBall" instance=ExtResource( 1 )]
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource( 1 )
+
+[node name="MoveForwardState" parent="." index="2"]
+speed = 800
+
+[node name="FreeOnExit" parent="." index="3"]
+obj_path = NodePath("../../EnemyLaserBall")

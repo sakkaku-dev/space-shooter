@@ -19,6 +19,6 @@ shape = SubResource( 1 )
 
 [node name="LaserSpawner" parent="." instance=ExtResource( 2 )]
 position = Vector2( 0, -44.7171 )
-scene = ExtResource( 1 )
-spawn_delay = 0.2
+scene = [ ExtResource( 1 ) ]
+spawn_delay = 0.5
 spawn = true

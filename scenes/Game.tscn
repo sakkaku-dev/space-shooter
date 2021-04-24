@@ -1,21 +1,36 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scenes/spaceship/PlayerShip.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/black.png" type="Texture" id=2]
 [ext_resource path="res://scenes/Game.gd" type="Script" id=3]
 [ext_resource path="res://shared/state/MouseFollowState.gd" type="Script" id=4]
-[ext_resource path="res://scenes/spaceship/EnemyShip.tscn" type="PackedScene" id=5]
+[ext_resource path="res://shared/misc/Spawner.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/theme.tres" type="Theme" id=6]
 [ext_resource path="res://scenes/ui/playerLife3_blue.png" type="Texture" id=7]
 [ext_resource path="res://scenes/ui/numeralX.png" type="Texture" id=8]
+[ext_resource path="res://scenes/spaceship/EnemyShip3.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/spaceship/EnemyShip.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/spaceship/EnemyShip4.tscn" type="PackedScene" id=11]
+[ext_resource path="res://shared/misc/RandomMove.tscn" type="PackedScene" id=12]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 540, 10 )
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 3 )
 
-[node name="EnemyShip" parent="." instance=ExtResource( 5 )]
-position = Vector2( 546.683, 99.396 )
-collision_layer = 1
-collision_mask = 1
+[node name="RandomMove" parent="." instance=ExtResource( 12 )]
+position = Vector2( 540, -50 )
+node_path = NodePath("../Spawner")
+
+[node name="CollisionShape2D" parent="RandomMove" index="0"]
+shape = SubResource( 1 )
+
+[node name="Spawner" parent="." instance=ExtResource( 5 )]
+position = Vector2( 540, 0 )
+scene = [ ExtResource( 10 ), ExtResource( 9 ), ExtResource( 11 ) ]
+spawn_delay = 3.0
+spawn = true
 
 [node name="PlayerShip" parent="." instance=ExtResource( 1 )]
 position = Vector2( 540, 1750 )
@@ -78,3 +93,6 @@ margin_left = 69.0
 margin_right = 102.0
 margin_bottom = 45.0
 text = "3"
+[connection signal="spawned" from="Spawner" to="RandomMove" method="move"]
+
+[editable path="RandomMove"]
