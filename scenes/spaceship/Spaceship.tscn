@@ -2,8 +2,8 @@
 
 [ext_resource path="res://shared/combat/HurtBox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/spaceship/playerShip3_blue.png" type="Texture" id=2]
-[ext_resource path="res://shared/misc/Spawner.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/laser/Laser.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/laser/LaserSpawner.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/spaceship/Spaceship.gd" type="Script" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 45.0
@@ -44,6 +44,7 @@ tracks/0/keys = {
 [node name="Spaceship" instance=ExtResource( 1 )]
 collision_layer = 0
 collision_mask = 0
+script = ExtResource( 5 )
 
 [node name="CollisionShape2D" parent="." index="1"]
 shape = SubResource( 1 )
@@ -51,13 +52,11 @@ shape = SubResource( 1 )
 [node name="Sprite" type="Sprite" parent="." index="2"]
 texture = ExtResource( 2 )
 
-[node name="LaserSpawner" parent="." index="3" instance=ExtResource( 3 )]
-position = Vector2( 0, -50 )
-scene = [ ExtResource( 4 ) ]
-spawn_delay = 0.5
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
 anims/Hit = SubResource( 2 )
 anims/Normal = SubResource( 3 )
+
+[node name="LaserSpawner" parent="." index="4" instance=ExtResource( 3 )]
+position = Vector2( 0, -47.3867 )
 [connection signal="hit" from="." to="AnimationPlayer" method="play" binds= [ "Hit" ]]
 [connection signal="invincibility_timeout" from="." to="AnimationPlayer" method="play" binds= [ "Normal" ]]

@@ -2,15 +2,23 @@ extends Node2D
 
 class_name RandomMove
 
-export var node_path: NodePath
-onready var node := get_node(node_path)
+export(Array, NodePath) var node_path: Array
 
 onready var collision := $CollisionShape2D
 
-func _ready():
-	move()
+var nodes = []
 
-func move():
+func _ready():
+	for path in node_path:
+		var node = get_node(path)
+		nodes.append(node)
+		move(node)
+
+func move_idx(idx):
+	if idx >= 0 and idx < nodes.size():
+		move(nodes[idx])
+
+func move(node):
 	var rect_shape = collision.shape as RectangleShape2D
 	var rand_local_pos = Vector2(
 		Random.random_int(0, rect_shape.extents.x * 2),

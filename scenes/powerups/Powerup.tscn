@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://shared/state/MoveForwardState.gd" type="Script" id=1]
+[ext_resource path="res://shared/misc/FreeOnExit.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/powerups/powerupBlue_bolt.png" type="Texture" id=3]
+[ext_resource path="res://scenes/powerups/Powerup.gd" type="Script" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 15, 15 )
+
+[node name="Powerup" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="MoveForwardState" type="Node" parent="."]
+script = ExtResource( 1 )
+speed = 500
+backwards = true
+body_path = NodePath("..")
+
+[node name="FreeOnExit" parent="." instance=ExtResource( 2 )]
+obj_path = NodePath("..")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+[connection signal="area_entered" from="." to="." method="_on_Powerup_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

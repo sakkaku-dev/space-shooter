@@ -54,6 +54,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://shared/input/PlayerInput.gd"
 }, {
+"base": "Node2D",
+"class": "PlayerShip",
+"language": "GDScript",
+"path": "res://scenes/spaceship/PlayerShip.gd"
+}, {
 "base": "Node",
 "class": "Random",
 "language": "GDScript",
@@ -68,6 +73,11 @@ _global_script_classes=[ {
 "class": "SceneTest",
 "language": "GDScript",
 "path": "res://tests/SceneTest.gd"
+}, {
+"base": "Node2D",
+"class": "Spawner",
+"language": "GDScript",
+"path": "res://shared/misc/Spawner.gd"
 }, {
 "base": "Node",
 "class": "State",
@@ -94,9 +104,11 @@ _global_script_class_icons={
 "MoveForwardState": "",
 "PlayerFocus": "",
 "PlayerInput": "",
+"PlayerShip": "",
 "Random": "",
 "RandomMove": "",
 "SceneTest": "",
+"Spawner": "",
 "State": "",
 "TableContainer": "",
 "UnitTest": ""

@@ -1,12 +1,20 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/spaceship/Spaceship.tscn" type="PackedScene" id=1]
 [ext_resource path="res://shared/state/MouseFollowState.gd" type="Script" id=2]
 [ext_resource path="res://shared/combat/Health.gd" type="Script" id=3]
 [ext_resource path="res://scenes/spaceship/PlayerShip.gd" type="Script" id=4]
 
-[node name="PlayerShip" type="Node2D"]
+[sub_resource type="CircleShape2D" id=1]
+radius = 50.0
+
+[node name="PlayerShip" type="Area2D"]
+collision_layer = 2
+collision_mask = 0
 script = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
 
 [node name="MouseFollowState" type="Node" parent="."]
 script = ExtResource( 2 )
@@ -22,7 +30,7 @@ collision_layer = 8
 [node name="InvincibilityTimer" parent="Spaceship" index="0"]
 one_shot = false
 
-[node name="LaserSpawner" parent="Spaceship" index="3"]
+[node name="LaserSpawner" parent="Spaceship" index="4"]
 spawn_delay = 0.3
 spawn = true
 [connection signal="zero_health" from="Health" to="." method="_on_Health_zero_health"]

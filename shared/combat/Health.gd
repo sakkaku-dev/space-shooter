@@ -22,6 +22,10 @@ func increase(value: int) -> void:
 	self.health += value
 
 
+func is_full_health() -> bool:
+	return health == max_health
+
+
 func _set_health(hp: int) -> void:
 	health = clamp(hp, 0, max_health)
 	emit_signal("health_changed", health)
