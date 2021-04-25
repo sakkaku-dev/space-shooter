@@ -23,6 +23,7 @@ collision_layer = 8
 one_shot = false
 
 [node name="LaserSpawner" parent="Spaceship" index="3"]
+spawn_delay = 0.3
 spawn = true
 [connection signal="zero_health" from="Health" to="." method="_on_Health_zero_health"]
 [connection signal="damaged" from="Spaceship" to="Health" method="reduce"]
