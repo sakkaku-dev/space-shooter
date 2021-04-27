@@ -47,9 +47,10 @@ func _get_all_spawn_pos() -> Array:
 func _get_random_scene() -> PackedScene:
 	var rand = Random.random_double()
 	
+	var rate_sum = 0
 	for i in range(0, scene.size()):
-		var rate = scene_spawn_rate[i]
-		if rand <= rate:
+		rate_sum = scene_spawn_rate[i]
+		if rand <= rate_sum:
 			return scene[i]
 	
 	return null
