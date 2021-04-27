@@ -16,3 +16,7 @@ func _on_Health_zero_health():
 
 func toggle_hurtbox():
 	hurtbox.set_deferred("disabled", not hurtbox.disabled)
+
+
+func change_laser_type(new_laser_scene: PackedScene) -> void:
+	laser.scene[0] = new_laser_scene

@@ -15,7 +15,7 @@ speed = 150
 [node name="Sprite" parent="Spaceship" index="2"]
 texture = ExtResource( 2 )
 
-[node name="LaserSpawner" parent="Spaceship" index="3"]
+[node name="LaserSpawner" parent="Spaceship" index="4"]
 scene = [ ExtResource( 3 ) ]
 spawn_delay = 3.0
 
