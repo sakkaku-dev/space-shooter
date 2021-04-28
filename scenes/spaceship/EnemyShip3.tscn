@@ -17,7 +17,7 @@ scene = [ ExtResource( 4 ) ]
 spawn_delay = 1.5
 spawn = true
 
-[node name="LaserSpawner" parent="Spaceship" index="4"]
+[node name="LaserSpawner" parent="Spaceship" index="5"]
 position = Vector2( -25, 50 )
 spawn_delay = 1.5
 

@@ -29,16 +29,14 @@ collision_layer = 16
 
 [node name="InvincibilityTimer" parent="Spaceship" index="0"]
 wait_time = 0.5
-one_shot = false
 
 [node name="Sprite" parent="Spaceship" index="2"]
 texture = ExtResource( 2 )
 
-[node name="LaserSpawner" parent="Spaceship" index="3"]
+[node name="LaserSpawner" parent="Spaceship" index="4"]
 position = Vector2( 0, 50 )
 rotation = 3.14159
 scene = [ ExtResource( 3 ) ]
-spawn_delay = 1.0
 spawn = true
 [connection signal="zero_health" from="Health" to="." method="_on_Health_zero_health"]
 [connection signal="damaged" from="Spaceship" to="Health" method="reduce"]

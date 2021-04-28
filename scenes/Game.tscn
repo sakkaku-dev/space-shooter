@@ -25,8 +25,15 @@ extents = Vector2( 500, 10 )
 [node name="Game" type="Node2D"]
 script = ExtResource( 3 )
 
+[node name="EnemyDelay" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="PowerupDelay" type="Timer" parent="."]
+wait_time = 10.0
+
 [node name="PlayerShip" parent="." instance=ExtResource( 1 )]
-position = Vector2( 540, 1750 )
+visible = false
+position = Vector2( 540, 1000 )
 
 [node name="SpawnerRandom" parent="." instance=ExtResource( 12 )]
 position = Vector2( 540, -50 )
@@ -39,12 +46,10 @@ shape = SubResource( 1 )
 position = Vector2( 0, 50 )
 scene = [ ExtResource( 10 ), ExtResource( 9 ), ExtResource( 11 ) ]
 spawn_delay = 3.0
-spawn = true
 
 [node name="PowerUpSpawner" parent="SpawnerRandom" instance=ExtResource( 5 )]
 scene = [ ExtResource( 16 ), ExtResource( 15 ), ExtResource( 4 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 13 ) ]
 spawn_delay = 5.0
-spawn = true
 scene_spawn_rate = [ 0.05, 0.2, 0.2, 0.1, 0.1 ]
 
 [node name="Background" type="CanvasLayer" parent="."]
@@ -102,10 +107,34 @@ margin_left = 69.0
 margin_right = 102.0
 margin_bottom = 45.0
 text = "3"
+
+[node name="Menu" type="CanvasLayer" parent="."]
+
+[node name="GUI" type="CenterContainer" parent="Menu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MainMenu" type="VBoxContainer" parent="Menu/GUI"]
+margin_left = 445.0
+margin_top = 932.0
+margin_right = 635.0
+margin_bottom = 987.0
+
+[node name="Start" type="Button" parent="Menu/GUI/MainMenu"]
+margin_right = 190.0
+margin_bottom = 55.0
+text = "Start"
+[connection signal="timeout" from="EnemyDelay" to="." method="_on_StartDelay_timeout"]
+[connection signal="timeout" from="PowerupDelay" to="." method="_on_PowerupDelay_timeout"]
 [connection signal="died" from="PlayerShip" to="." method="_on_PlayerShip_died"]
 [connection signal="health_changed" from="PlayerShip/Health" to="UI/MarginContainer/HealthUI" method="set_health"]
 [connection signal="spawned" from="SpawnerRandom/Spawner" to="SpawnerRandom" method="move_idx" binds= [ 0 ]]
 [connection signal="spawned" from="SpawnerRandom/PowerUpSpawner" to="SpawnerRandom" method="move_idx" binds= [ 1 ]]
+[connection signal="pressed" from="Menu/GUI/MainMenu/Start" to="." method="start_game"]
 
 [editable path="PlayerShip"]
 
