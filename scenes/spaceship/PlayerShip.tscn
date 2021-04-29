@@ -18,6 +18,7 @@ shape = SubResource( 1 )
 
 [node name="MouseFollowState" type="Node" parent="."]
 script = ExtResource( 2 )
+follow = true
 body_path = NodePath("..")
 
 [node name="Health" type="Node" parent="."]
@@ -29,6 +30,8 @@ collision_layer = 8
 
 [node name="LaserSpawner" parent="Spaceship" index="4"]
 spawn_delay = 0.3
+spawn = true
+[connection signal="health_changed" from="Health" to="." method="_on_Health_health_changed"]
 [connection signal="zero_health" from="Health" to="." method="_on_Health_zero_health"]
 [connection signal="damaged" from="Spaceship" to="Health" method="reduce"]
 

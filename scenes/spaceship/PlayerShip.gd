@@ -3,6 +3,7 @@ extends Node2D
 class_name PlayerShip
 
 signal died
+signal health_changed
 
 onready var health: Health = $Health
 onready var laser = $Spaceship/LaserSpawner
@@ -22,8 +23,6 @@ func toggle_hurtbox():
 func change_laser_type(new_laser_scene: PackedScene) -> void:
 	laser.scene[0] = new_laser_scene
 
-func set_shoot(shoot: bool) -> void:
-	laser.spawn = shoot
 
-func set_follow(follow: bool) -> void:
-	follow_state.follow = follow
+func _on_Health_health_changed(hp):
+	emit_signal("health_changed", hp)
