@@ -79,21 +79,25 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HealthUI" type="HBoxContainer" parent="UI/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/MarginContainer"]
 margin_left = 30.0
 margin_top = 30.0
 margin_right = 1050.0
 margin_bottom = 75.0
+
+[node name="HealthUI" type="HBoxContainer" parent="UI/MarginContainer/HBoxContainer"]
+margin_right = 102.0
+margin_bottom = 45.0
 custom_constants/separation = 10
 script = ExtResource( 14 )
 
-[node name="TextureRect" type="TextureRect" parent="UI/MarginContainer/HealthUI"]
+[node name="TextureRect" type="TextureRect" parent="UI/MarginContainer/HBoxContainer/HealthUI"]
 margin_right = 32.0
 margin_bottom = 45.0
 texture = ExtResource( 7 )
 stretch_mode = 4
 
-[node name="TextureRect2" type="TextureRect" parent="UI/MarginContainer/HealthUI"]
+[node name="TextureRect2" type="TextureRect" parent="UI/MarginContainer/HBoxContainer/HealthUI"]
 margin_left = 42.0
 margin_right = 59.0
 margin_bottom = 45.0
@@ -103,11 +107,22 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="UI/MarginContainer/HealthUI"]
+[node name="Label" type="Label" parent="UI/MarginContainer/HBoxContainer/HealthUI"]
 margin_left = 69.0
 margin_right = 102.0
 margin_bottom = 45.0
 text = "3"
+
+[node name="Control" type="Control" parent="UI/MarginContainer/HBoxContainer"]
+margin_left = 106.0
+margin_right = 1016.0
+margin_bottom = 45.0
+size_flags_horizontal = 3
+
+[node name="Score" type="Label" parent="UI/MarginContainer/HBoxContainer"]
+margin_left = 1020.0
+margin_right = 1020.0
+margin_bottom = 45.0
 
 [node name="Menu" type="CanvasLayer" parent="."]
 

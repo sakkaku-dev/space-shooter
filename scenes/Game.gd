@@ -7,14 +7,27 @@ onready var enemy_delay = $EnemyDelay
 onready var powerup_delay = $PowerupDelay
 onready var wait_clear = $WaitClear
 
-onready var health = $UI/MarginContainer/HealthUI
+onready var health = $UI/MarginContainer/HBoxContainer/HealthUI
+onready var score = $UI/MarginContainer/HBoxContainer/Score
 onready var main_menu = $Menu/GUI/MainMenu
 onready var game_over = $Menu/GUI/GameOver
 
 var player_ship_scene = preload("res://scenes/spaceship/PlayerShip.tscn")
+var time = 0
+var started = false
 
 func _ready():
 	main_menu.show()
+
+
+func _process(delta):
+	if started:
+		time += delta
+		score.text = str(_get_score())
+
+
+func _get_score():
+	return int(time / 5.0)
 
 
 func spawn_player():
@@ -36,6 +49,8 @@ func start_game():
 	spawn_player()
 	enemy_delay.start()
 	powerup_delay.start()
+	time = 0
+	started = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
 
@@ -46,6 +61,7 @@ func _on_PlayerShip_died():
 	powerup_spawner.set_spawn(false)
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	game_over.show()
+	started = false
 
 
 func _on_StartDelay_timeout():
