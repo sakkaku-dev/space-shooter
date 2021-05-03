@@ -33,7 +33,7 @@ func _process(delta):
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _get_score():
-	return int(time / 5.0)
+	return Globals.enemy_kill_score + int(time / 5.0)
 
 
 func spawn_player():
@@ -56,6 +56,7 @@ func start_game():
 	enemy_delay.start()
 	powerup_delay.start()
 	time = 0
+	Globals.enemy_kill_score = 0
 	started = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 

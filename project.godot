@@ -138,6 +138,10 @@ config/name="space-shooter"
 run/main_scene="res://scenes/Game.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Globals="*res://scripts/Globals.gd"
+
 [display]
 
 window/size/width=1080
