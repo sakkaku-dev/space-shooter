@@ -13,12 +13,14 @@ onready var username := $SubmitInput/Name
 onready var submit_btn := $SubmitInput/Submit
 onready var score_label := $Score
 
-var submitted = false
+var submitted = true
 var submitting = false
 var score = 0 setget set_score
+var loading = false
 
 func _ready():
 	title.text = "Scoreboard: Top " + str(score_limit)
+	load_scores()
 
 
 func set_score(value):
@@ -28,12 +30,18 @@ func set_score(value):
 
 
 func load_scores():
+	if loading: return
+	
+	loading = true
 	submit_btn.disabled = true
 	if http.request(url) != OK:
 		print("Failed to get scores")
 
 func _set_scores(scores):
 	table.clear()
+	
+	if scores.size() == 0 and not submitted:
+		submit_btn.disabled = false
 	
 	for s in scores:
 		var datetime = OS.get_datetime_from_unix_time(s.time)
@@ -45,6 +53,8 @@ func _set_scores(scores):
 
 
 func _on_ScoreRequest_request_completed(result, response_code, headers, body: PoolByteArray):
+	loading = false
+	
 	if result != HTTPRequest.RESULT_SUCCESS:
 		print("Request was not successful")
 		return
@@ -73,3 +83,4 @@ func _on_Submit_pressed():
 		submitting = true
 	else:
 		print("Failed to submit score")
+
