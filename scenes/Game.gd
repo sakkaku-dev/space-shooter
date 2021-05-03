@@ -27,6 +27,10 @@ func _process(delta):
 		time += delta
 		score.text = str(_get_score())
 
+		if get_viewport_rect().has_point(get_global_mouse_position()):
+			Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+		else:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _get_score():
 	return int(time / 5.0)
