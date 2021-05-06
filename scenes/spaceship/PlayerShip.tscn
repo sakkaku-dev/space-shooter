@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/spaceship/Spaceship.tscn" type="PackedScene" id=1]
 [ext_resource path="res://shared/state/MouseFollowState.gd" type="Script" id=2]
 [ext_resource path="res://shared/combat/Health.gd" type="Script" id=3]
 [ext_resource path="res://scenes/spaceship/PlayerShip.gd" type="Script" id=4]
+[ext_resource path="res://assets/laser.wav" type="AudioStream" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 50.0
@@ -12,6 +13,10 @@ radius = 50.0
 collision_layer = 2
 collision_mask = 0
 script = ExtResource( 4 )
+
+[node name="LaserShot" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = -20.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
@@ -34,5 +39,6 @@ spawn = true
 [connection signal="health_changed" from="Health" to="." method="_on_Health_health_changed"]
 [connection signal="zero_health" from="Health" to="." method="_on_Health_zero_health"]
 [connection signal="damaged" from="Spaceship" to="Health" method="reduce"]
+[connection signal="spawned" from="Spaceship/LaserSpawner" to="LaserShot" method="play"]
 
 [editable path="Spaceship"]

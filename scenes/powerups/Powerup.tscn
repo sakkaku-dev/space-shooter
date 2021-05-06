@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://shared/state/MoveForwardState.gd" type="Script" id=1]
 [ext_resource path="res://shared/misc/FreeOnExit.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/powerups/powerupBlue_bolt.png" type="Texture" id=3]
 [ext_resource path="res://scenes/powerups/Powerup.gd" type="Script" id=4]
+[ext_resource path="res://scenes/powerups/powerup.wav" type="AudioStream" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 15, 15 )
@@ -32,5 +33,9 @@ obj_path = NodePath("..")
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
+
+[node name="PickUpSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
 [connection signal="area_entered" from="." to="." method="_on_Powerup_area_entered"]
+[connection signal="pick" from="." to="PickUpSound" method="play"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

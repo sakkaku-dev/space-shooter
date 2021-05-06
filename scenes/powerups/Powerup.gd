@@ -1,5 +1,6 @@
 extends Area2D
 
+signal pick
 signal picked_up(player)
 signal powerup_timeout(player)
 
@@ -15,6 +16,7 @@ func _on_Powerup_area_entered(area):
 	player = area
 	if not player: return
 	
+	emit_signal("pick")
 	emit_signal("picked_up", player)
 	
 	if powerup_time > 0:

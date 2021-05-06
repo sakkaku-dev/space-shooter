@@ -13,6 +13,9 @@ onready var main_menu = $Menu/GUI/MainMenu
 onready var game_over = $Menu/GUI/MainMenu/Gameover
 onready var score_table = $Menu/GUI/Scoreboard/ScoreTable
 
+onready var game_over_sound = $GameOverSound
+onready var bgm = $BGM
+
 var player_ship_scene = preload("res://scenes/spaceship/PlayerShip.tscn")
 var time = 0
 var started = false
@@ -20,7 +23,6 @@ var started = false
 func _ready():
 	main_menu.show()
 	game_over.hide()
-
 
 func _process(delta):
 	if started:
@@ -59,6 +61,7 @@ func start_game():
 	Globals.enemy_kill_score = 0
 	started = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	bgm.play()
 
 
 func _on_PlayerShip_died():
@@ -69,9 +72,11 @@ func _on_PlayerShip_died():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	main_menu.show()
 	game_over.show()
+	game_over_sound.play()
 	started = false
 	score_table.score = _get_score()
 	score_table.load_scores()
+	bgm.stop()
 
 
 func _on_StartDelay_timeout():

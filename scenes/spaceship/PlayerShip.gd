@@ -11,9 +11,13 @@ onready var hurtbox = $Spaceship/CollisionShape2D
 onready var follow_state = $MouseFollowState
 
 var has_shield
+var explosion = preload("res://scenes/explosion/Explosion.tscn")
 
 func _on_Health_zero_health():
 	emit_signal("died")
+	var instance = explosion.instance()
+	get_tree().current_scene.add_child(instance)
+	instance.global_position = global_position
 	queue_free()
 
 func toggle_hurtbox():
