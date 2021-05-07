@@ -92,6 +92,9 @@ func _on_PlayerShip_died():
 	score_table.score = _get_score()
 	score_table.load_scores()
 	bgm.stop()
+	
+	for enemy in get_tree().get_nodes_in_group("Enemy"):
+		enemy.set_speed(800)
 
 
 func _on_StartDelay_timeout():

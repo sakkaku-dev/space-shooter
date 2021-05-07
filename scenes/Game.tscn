@@ -24,7 +24,7 @@
 [ext_resource path="res://assets/game_over.wav" type="AudioStream" id=22]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 500, 10 )
+extents = Vector2( 510, 10 )
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 3 )
