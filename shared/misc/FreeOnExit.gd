@@ -9,3 +9,7 @@ func _on_FreeOnExit_screen_exited():
 	if enabled:
 		obj.queue_free()
 
+
+func _on_Timer_timeout():
+	if not is_on_screen():
+		obj.queue_free()
