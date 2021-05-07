@@ -19,6 +19,7 @@ onready var bgm = $BGM
 var player_ship_scene = preload("res://scenes/spaceship/PlayerShip.tscn")
 var time = 0
 var started = false
+var decreased = false
 
 func _ready():
 	main_menu.show()
@@ -28,11 +29,25 @@ func _process(delta):
 	if started:
 		time += delta
 		score.text = str(_get_score())
+		
+		_decrease_spawn(spawner, 1)
+		_decrease_spawn(powerup_spawner, 3)
 
 		if get_viewport_rect().has_point(get_global_mouse_position()):
 			Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+
+func _decrease_spawn(spawn: Spawner, min_value: int) -> void:
+	if int(time) % 50 == 0:
+		if not decreased:
+			spawn.spawn_delay -= 0.2
+			spawn.spawn_delay = max(min_value, spawn.spawn_delay)
+			decreased = true
+	else:
+		decreased = false
+
 
 func _get_score():
 	return Globals.enemy_kill_score + int(time / 5.0)

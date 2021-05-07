@@ -5,7 +5,7 @@
 [ext_resource path="res://scenes/powerups/powerupBlue_triple.png" type="Texture" id=3]
 
 [node name="TripleAngleShot" instance=ExtResource( 1 )]
-powerup_time = 5
+powerup_time = 10
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 3 )
